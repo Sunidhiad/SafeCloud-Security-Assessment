@@ -103,7 +103,7 @@ Successful exploitation allows an attacker to:
 
 ### Screenshot 1 - Victim Account Before Attack
 
-![Victim Before Attack](../screenshots/folder-before.png)
+![Victim Before Attack](screenshots/folder-before.png)
 
 **Explanation:**
 
@@ -113,7 +113,7 @@ This screenshot shows User A's account before exploitation. The attacker-created
 
 ### Screenshot 2 - Modified Folder Creation Request
 
-![Folder Creation Request](../screenshots/folder-create-request-userB.png)
+![Folder Creation Request](screenshots/folder-create-request-userB.png)
 
 **Explanation:**
 
@@ -123,7 +123,7 @@ User B (attacker) intercepts the folder creation request using Burp Suite. The a
 
 ### Screenshot 3 - Successful Server Response
 
-![Folder Creation Response](../screenshots/folder-create-response.png)
+![Folder Creation Response](screenshots/folder-create-response.png)
 
 **Explanation:**
 
@@ -133,7 +133,7 @@ The application processes the manipulated request and returns a successful respo
 
 ### Screenshot 4 - Folder Appears in Victim Account
 
-![Folder Created Under Victim](../screenshots/folder-created-under-victim.png)
+![Folder Created Under Victim](screenshots/folder-created-under-victim.png)
 
 **Explanation:**
 
