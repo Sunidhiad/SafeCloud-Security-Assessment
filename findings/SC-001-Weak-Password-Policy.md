@@ -40,13 +40,21 @@ Weak passwords significantly increase the risk of:
 
 ## Evidence
 
-### Screenshot 1
+### Screenshot 1 - Weak Password Accepted
 
-Weak password accepted during registration.
+![Weak Password Registration](screenshots/weak-password-registration.png)
 
-### Screenshot 2
+The application accepted the weak password `123456` during account registration.
 
-Account successfully created using the weak password.
+---
+
+### Screenshot 2 - Successful Account Creation
+
+![Weak Password Success](screenshots/weak-password-success.png)
+
+The account was successfully created using the weak password.
+
+
 
 ## Recommendation
 
