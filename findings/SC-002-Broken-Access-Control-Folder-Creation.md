@@ -99,22 +99,25 @@ Successful exploitation allows an attacker to:
 * Abuse application functionality
 
 ---
-
 ## Evidence
 
 ### Screenshot 1 - Victim Account Before Attack
 
 ![Victim Before Attack](../screenshots/folder-before.png)
 
-The victim account does not contain the attacker-created folder.
+**Explanation:**
+
+This screenshot shows User A's account before exploitation. The attacker-created folder does not exist within the victim's account. This establishes the baseline state before the attack is performed.
 
 ---
 
 ### Screenshot 2 - Modified Folder Creation Request
 
-![Folder Creation Request](../screenshots/folder-create-request.png)
+![Folder Creation Request](../screenshots/folder-create-request-userB.png)
 
-The attacker modifies the `owner_id` parameter to the victim's UUID.
+**Explanation:**
+
+User B (attacker) intercepts the folder creation request using Burp Suite. The attacker modifies the `owner_id` parameter and replaces it with the UUID belonging to User A (victim). This demonstrates that ownership information can be controlled by the client and is not securely enforced by the application.
 
 ---
 
@@ -122,17 +125,44 @@ The attacker modifies the `owner_id` parameter to the victim's UUID.
 
 ![Folder Creation Response](../screenshots/folder-create-response.png)
 
-The application returns a successful response after processing the modified request.
+**Explanation:**
+
+The application processes the manipulated request and returns a successful response (`HTTP/2 201 Created`). The request is accepted despite the authenticated user not owning the supplied `owner_id`, indicating missing authorization validation.
 
 ---
 
 ### Screenshot 4 - Folder Appears in Victim Account
 
-![Folder Created Under Victim](../screenshots/folder-after-create.png)
+![Folder Created Under Victim](../screenshots/folder-created-under-victim.png)
 
-The attacker-controlled folder is visible within the victim's account.
+**Explanation:**
+
+After the manipulated request is processed, the newly created folder becomes visible in User A's account. This confirms that User B was able to create resources on behalf of another user without authorization.
 
 ---
+
+### Attack Flow Summary
+
+```text
+User B (Attacker)
+        │
+        ▼
+Intercept Folder Creation Request
+        │
+        ▼
+Modify owner_id → User A UUID
+        │
+        ▼
+Server Accepts Request (201 Created)
+        │
+        ▼
+Folder Created Under User A Account
+```
+
+**Result:**
+
+Unauthorized folder creation was successfully achieved by manipulating the `owner_id` parameter, confirming a Broken Access Control vulnerability.
+
 
 ## Root Cause
 
